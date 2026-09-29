@@ -1,0 +1,56 @@
+# Video Downloader API
+
+A production-oriented FastAPI application for downloading and converting media from supported sites via `yt-dlp`, with FFmpeg-based conversion and PostgreSQL-backed job tracking.
+
+## Features
+
+- Health endpoint
+- REST endpoints for download jobs and status checks
+- URL validation and supported format inspection
+- MP4 and MP3 conversion options
+- Background job processing
+- PostgreSQL job metadata storage
+- File serving and deletion API
+- Docker-ready deployment setup
+
+## Local development
+
+1. Create a virtual environment
+2. Install dependencies:
+   - `pip install -r requirements.txt`
+3. Copy `.env.example` to `.env`
+4. Start services:
+   - `docker compose up --build`
+5. Open the API docs:
+   - `http://localhost:8000/docs`
+
+## Main API endpoints
+
+- `GET /health`
+- `POST /api/v1/download`
+- `GET /api/v1/status/{job_id}`
+- `GET /api/v1/formats?url=...`
+- `GET /api/v1/files/{file_id}`
+- `DELETE /api/v1/files/{file_id}`
+
+## Example request
+
+```bash
+curl -X POST http://localhost:8000/api/v1/download \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://www.youtube.com/watch?v=example",
+    "format": "mp4",
+    "quality": "720p"
+  }'
+```
+
+## Deployment
+
+This project is structured for deployment on Render or similar Docker-based platforms.
+
+## Notes
+
+- This app requires FFmpeg to be available in the environment.
+- The downloader is designed for supported sites via `yt-dlp` and is not an external third-party downloader API.
+- Production environments should use stronger secrets, persistent storage, and queue-based job processing for high concurrency.

@@ -1,2 +1,7 @@
-# video-downloader-api
-Production-ready REST API for video downloading and format conversion using FastAPI, yt-dlp, and FFmpeg
+APP_NAME="Video Downloader API"
+APP_VERSION="0.1.0"
+ENVIRONMENT="development"
+DATABASE_URL="postgresql+psycopg://postgres:postgres@db:5432/video_downloader"
+SECRET_KEY="change-me-in-production"
+UPLOAD_DIR="/tmp/video_downloader"
+PUBLIC_BASE_URL="http://localhost:8000"
